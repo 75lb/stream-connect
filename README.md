@@ -30,14 +30,14 @@ pass2 testing
 ```
 <a name="exp_module_stream-connect--connect"></a>
 ### connect(one, two) ⇒ <code>[Transform](https://nodejs.org/api/stream.html#stream_class_stream_transform)</code> ⏏
-connects two duplex streams together
+Connects two duplex streams together.
 
 **Kind**: Exported function  
 
-| Param | Type |
-| --- | --- |
-| one | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | 
-| two | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| one | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | source stream |
+| two | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | dest stream, to be connected to |
 
 
 * * *

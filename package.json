@@ -2,14 +2,11 @@
   "name": "stream-connect",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "0.0.0",
-  "description": "stream-connect",
+  "description": "Create a pipeline of connected streams",
   "repository": "https://github.com/75lb/stream-connect.git",
   "license": "MIT",
   "main": "./lib/stream-connect.js",
-  "bin": {
-    "stream-connect": "bin/cli.js"
-  },
-  "keywords": [],
+  "keywords": [ "connect", "combine", "stream", "streams", "transform" ],
   "engines": {
     "node": ">=0.10.0"
   },
