@@ -1,0 +1,25 @@
+{
+  "name": "stream-connect",
+  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "version": "0.0.0",
+  "description": "stream-connect",
+  "repository": "https://github.com/75lb/stream-connect.git",
+  "license": "MIT",
+  "main": "./lib/stream-connect.js",
+  "bin": {
+    "stream-connect": "bin/cli.js"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "tape test/*.js",
+    "lint": "jshint lib/*.js bin/*.js test/*.js; echo",
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^1.1.1",
+    "tape": "^4.0.0"
+  }
+}
