@@ -89,3 +89,23 @@ test('error in second of connected streams passed on', function (t) {
   })
   connected.end('test')
 })
+
+test('connected stream emits correct events', function (t) {
+  t.plan(4)
+  var pass1 = PassThrough()
+  var pass2 = PassThrough()
+
+  var connected = streamConnect(pass1, pass2)
+  connected
+    .on('data', function () {
+      t.pass('data called')
+    })
+    .on('end', function () {
+      t.pass('end received')
+    })
+    .on('finish', function () {
+      t.pass('finish received')
+    })
+  connected.write('one')
+  connected.end('two')
+})
