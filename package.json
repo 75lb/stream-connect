@@ -1,7 +1,7 @@
 {
   "name": "stream-connect",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create a pipeline of connected streams",
   "repository": "https://github.com/75lb/stream-connect.git",
   "license": "MIT",
