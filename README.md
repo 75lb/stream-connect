@@ -6,28 +6,26 @@
 
 <a name="module_stream-connect"></a>
 ## stream-connect
-Create a pipeline of connected streams.
+Connect two streams returning a single duplex stream. Writes to the connected stream are written to stream one, while reads are read from stream two.
 
 **Example**  
 ```js
-> streamConnect = require("stream-connect")
-> PassThrough = require("stream").PassThrough
+const connect = require('stream-connect')
 
-> pass1 = PassThrough()
-> pass1.setEncoding("utf8")
-> pass1.on("data", console.log.bind(console, "pass1"))
+function streamsOneAndTwo () {
+  const streamOne = getStreamOneSomehow()
+  const streamTwo = getStreamTwoSomehow()
 
-> pass2 = PassThrough()
-> pass2.setEncoding("utf8")
-> pass2.on("data", console.log.bind(console, "pass2"))
+  // we want to return streams one and two pre-connected.
+  // we can't return `streamOne.pipe(streamTwo)` as this returns streamTwo but the calling code wants to write to streamOne and receive the output from streamTwo
+  // so, return a new stream which is streams one and two connected:
+  const streamsOneAndTwo = connect(streamOne(), streamTwo())
+}
 
-> pass1.write("testing")
-pass1 testing
-
-> connected = streamConnect(pass1, pass2)
-> connected.write("testing")
-pass1 testing
-pass2 testing
+// the source code ('main.js') is piped through the pre-connected streamOne and streamTwo, then stdout
+fs.createReadStream('main.js')
+  .pipe(streamsOneAndTwo())
+  .pipe(process.stdout)
 ```
 <a name="exp_module_stream-connect--connect"></a>
 ### connect(one, two) ⇒ <code>[Transform](https://nodejs.org/api/stream.html#stream_class_stream_transform)</code> ⏏
