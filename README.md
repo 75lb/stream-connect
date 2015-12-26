@@ -18,12 +18,12 @@ function streamsOneAndTwo () {
 
   // We want to return streams one and two pre-connected. We can't return
   // `streamOne.pipe(streamTwo)` as this returns streamTwo while the calling code
-  // wants to write to streamOne and receive the output from streamTwo.
+  // wants to write to streamOne yet receive the output from streamTwo.
   // So, return a new stream which is streams one and two connected:
   const streamsOneAndTwo = connect(streamOne(), streamTwo())
 }
 
-// the source code ('main.js') is piped through the pre-connected streamOne and streamTwo, then stdout
+// main.js is piped through the pre-connected streamOne and streamTwo, then stdout
 fs.createReadStream('main.js')
   .pipe(streamsOneAndTwo())
   .pipe(process.stdout)
