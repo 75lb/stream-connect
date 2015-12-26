@@ -41,16 +41,22 @@ test('chunk processed by both connected streams', function (t) {
 })
 
 test('pipe', function (t) {
-  t.plan(2)
+  t.plan(3)
   var pass1 = PassThrough()
-  pass1.on('data', function (data) {
-    t.strictEqual(data.toString(), 'test\n')
-  })
-
   var pass2 = PassThrough()
-  pass2.on('data', function (data) {
-    t.strictEqual(data.toString(), 'test\n')
-  })
+
+  pass1
+    .on('pipe', function () {
+      t.pass('"pipe" emitted')
+    })
+    .on('data', function (data) {
+      t.strictEqual(data.toString(), 'test\n', 'correct "data" 1')
+    })
+
+  pass2
+    .on('data', function (data) {
+      t.strictEqual(data.toString(), 'test\n', 'correct "data" 2')
+    })
 
   var connected = streamConnect(pass1, pass2)
   fs.createReadStream('test/fixture.txt', 'utf8').pipe(connected)
