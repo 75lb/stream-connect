@@ -6,7 +6,7 @@
 
 <a name="module_stream-connect"></a>
 ## stream-connect
-Connect two streams returning a single duplex stream. Writes to the connected stream are written to stream one, while reads are read from stream two.
+Connect two streams returning a single duplex stream. Use over `.pipe()` when you want to write to the source stream yet read from the destination.
 
 **Example**  
 ```js
@@ -28,8 +28,8 @@ fs.createReadStream('main.js')
   .pipe(process.stdout)
 ```
 <a name="exp_module_stream-connect--connect"></a>
-### connect(one, two) ⇒ <code>[Transform](https://nodejs.org/api/stream.html#stream_class_stream_transform)</code> ⏏
-Connects two duplex streams together.
+### connect(one, two) ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
+Connects two streams together.
 
 **Kind**: Exported function  
 
