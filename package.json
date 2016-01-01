@@ -18,9 +18,11 @@
   },
   "scripts": {
     "test": "tape test/*.js",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo",
+    "cover": "istanbul cover ./node_modules/.bin/tape test/*.js && cat coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf coverage; echo"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
     "jsdoc-to-markdown": "^1.1.1",
     "stream-via": "^0.1.1",
     "tape": "^4.0.0"
