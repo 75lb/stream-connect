@@ -1,7 +1,7 @@
 [![view on npm](http://img.shields.io/npm/v/stream-connect.svg)](https://www.npmjs.org/package/stream-connect)
 [![npm module downloads](http://img.shields.io/npm/dt/stream-connect.svg)](https://www.npmjs.org/package/stream-connect)
 [![Build Status](https://travis-ci.org/75lb/stream-connect.svg?branch=master)](https://travis-ci.org/75lb/stream-connect)
-[![Coverage Status](https://coveralls.io/repos/stream-connect/badge.svg?branch=master&service=github)](https://coveralls.io/github/stream-connect?branch=master)
+[![Coverage Status](https://coveralls.io/repos/75lb/stream-connect/badge.svg?branch=master&service=github)](https://coveralls.io/github/75lb/stream-connect?branch=master)
 [![Dependency Status](https://david-dm.org/75lb/stream-connect.svg)](https://david-dm.org/75lb/stream-connect)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
