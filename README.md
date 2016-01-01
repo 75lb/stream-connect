@@ -20,7 +20,7 @@ const connected = connect(stream1, stream2, stream3, stream4)
 // then output into process.stdout. Errors in any of the internal streams are emitted
 // by the connected stream.
 process.stdin
-  .pipe(connected
+  .pipe(connected)
   .on('error', console.error)
   .pipe(process.stdout)
 ```
@@ -56,7 +56,18 @@ stream.end('test') // is written to streamOne
 
 Any errors emitted in `streamOne` or `streamTwo` are propagated to the output stream.
 
-{>main}}
+<a name="module_stream-connect"></a>
+## stream-connect
+<a name="exp_module_stream-connect--connect"></a>
+### connect() ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
+Connect streams.
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ... | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | One or more streams to connect. |
+
 
 * * *
 
