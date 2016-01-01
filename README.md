@@ -21,7 +21,7 @@ stream.on('error', function (err) {}) // catches errors only from streamTwo
 stream.end('test') // is written to streamTwo
 ```
 
-If you write to the output it will be written to `streamTwo`, whereas you probably wanted to write to the start of the pipeline and read from the end. Fixed by stream-connect:
+If you write to the output it will be written to `streamTwo`, whereas you probably wanted to write to the  * start of the pipeline and read from the end. Fixed by stream-connect:
 
 ```js
 const connect = require('stream-connect')
@@ -39,36 +39,15 @@ stream.end('test') // is written to streamOne
 
 Any errors emitted in `streamOne` or `streamTwo` are propagated to the output stream.
 
-**Example**  
-```js
-const connect = require('stream-connect')
-
-function streamsOneAndTwo () {
-  const streamOne = getStreamOneSomehow()
-  const streamTwo = getStreamTwoSomehow()
-
-  // We want to return streams one and two pre-connected. We can't return
-  // `streamOne.pipe(streamTwo)` as this returns streamTwo while the calling code
-  // wants to write to streamOne yet receive the output from streamTwo.
-  // So, return a new stream which is streams one and two connected:
-  const streamsOneAndTwo = connect(streamOne(), streamTwo())
-}
-
-// main.js is piped through the pre-connected streamOne and streamTwo, then stdout
-fs.createReadStream('main.js')
-  .pipe(streamsOneAndTwo())
-  .pipe(process.stdout)
-```
 <a name="exp_module_stream-connect--connect"></a>
-### connect(one, two) ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
-Connects two streams together.
+### connect() ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
+Connect streams.
 
 **Kind**: Exported function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| one | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | source stream |
-| two | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | dest stream, to be connected to |
+| ... | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | One or more streams to connect. |
 
 
 * * *

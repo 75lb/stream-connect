@@ -4,7 +4,7 @@ var PassThrough = require('stream').PassThrough
 var fs = require('fs')
 var via = require('stream-via')
 
-test('chunk passes through both connected streams', function (t) {
+test('chunk passes through two connected streams', function (t) {
   t.plan(2)
   var pass1 = PassThrough()
   pass1.on('data', function (data) {
@@ -17,6 +17,27 @@ test('chunk passes through both connected streams', function (t) {
   })
 
   var connected = streamConnect(pass1, pass2)
+  connected.end('testing')
+})
+
+test('chunk passes through three connected streams', function (t) {
+  t.plan(3)
+  var pass1 = PassThrough()
+  pass1.on('data', function (data) {
+    t.strictEqual(data.toString(), 'testing')
+  })
+
+  var pass2 = PassThrough()
+  pass2.on('data', function (data) {
+    t.strictEqual(data.toString(), 'testing')
+  })
+
+  var pass3 = PassThrough()
+  pass3.on('data', function (data) {
+    t.strictEqual(data.toString(), 'testing')
+  })
+
+  var connected = streamConnect(pass1, pass2, pass3)
   connected.end('testing')
 })
 
@@ -40,10 +61,35 @@ test('chunk processed by both connected streams', function (t) {
   connected.end('test')
 })
 
-test('pipe', function (t) {
+test('chunk processed by three connected streams', function (t) {
   t.plan(4)
+  var one = via(function (chunk) {
+    t.strictEqual(chunk.toString(), 'test')
+    return chunk.toString() + '1'
+  })
+  var two = via(function (chunk) {
+    t.strictEqual(chunk.toString(), 'test1')
+    return chunk.toString() + '2'
+  })
+  var three = via(function (chunk) {
+    t.strictEqual(chunk.toString(), 'test12')
+    return chunk.toString() + '3'
+  })
+  var connected = streamConnect(one, two, three)
+  connected.on('readable', function () {
+    var chunk = this.read()
+    if (chunk) {
+      t.strictEqual(chunk.toString(), 'test123')
+    }
+  })
+  connected.end('test')
+})
+
+test('pipe', function (t) {
+  t.plan(5)
   var pass1 = PassThrough()
   var pass2 = PassThrough()
+  var pass3 = PassThrough()
 
   pass1
     .on('pipe', function (src) {
@@ -59,7 +105,12 @@ test('pipe', function (t) {
       t.strictEqual(data.toString(), 'test\n', 'correct "data" 2')
     })
 
-  var connected = streamConnect(pass1, pass2)
+  pass3
+    .on('data', function (data) {
+      t.strictEqual(data.toString(), 'test\n', 'correct "data" 3')
+    })
+
+  var connected = streamConnect(pass1, pass2, pass3)
   var inputStream = fs.createReadStream('test/fixture.txt', 'utf8')
   inputStream.pipe(connected)
 })
