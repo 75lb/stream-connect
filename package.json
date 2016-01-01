@@ -1,7 +1,7 @@
 {
   "name": "stream-connect",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Connects an arbitrary number of streams into a single, combined stream",
   "repository": "https://github.com/75lb/stream-connect.git",
   "license": "MIT",
