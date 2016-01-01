@@ -58,15 +58,19 @@ Any errors emitted in `streamOne` or `streamTwo` are propagated to the output st
 
 <a name="module_stream-connect"></a>
 ## stream-connect
+**Example**  
+```js
+const connect = require('stream-connect')
+```
 <a name="exp_module_stream-connect--connect"></a>
-### connect() ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
+### connect(...streams) ⇒ <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> ⏏
 Connect streams.
 
 **Kind**: Exported function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ... | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | One or more streams to connect. |
+| ...streams | <code>[Duplex](https://nodejs.org/api/stream.html#stream_class_stream_duplex)</code> | One or more streams to connect. |
 
 
 * * *
