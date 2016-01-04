@@ -149,6 +149,27 @@ test('error in second of connected streams passed on', function (t) {
   connected.end('test')
 })
 
+test('error in middle of connected streams passed on', function (t) {
+  t.plan(2)
+  var brokenError = new Error('broken')
+  var one = new PassThrough()
+  one.on('data', function (data) {
+    t.strictEqual(data.toString(), 'test')
+  })
+  var two = via(function (chunk) {
+    throw brokenError
+  })
+  var three = new PassThrough()
+  three.on('data', function (data) {
+    t.fail('should not reach here')
+  })
+  var connected = streamConnect(one, two, three)
+  connected.on('error', function (err) {
+    t.strictEqual(err, brokenError)
+  })
+  connected.end('test')
+})
+
 test('connected stream emits correct events', function (t) {
   t.plan(4)
   var pass1 = PassThrough()
